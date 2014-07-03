@@ -117,7 +117,7 @@ class Exportable {
     if (_isJsonSupported(value)) {
       if (value is List)
       {
-        List mapList = new List();
+        List mapList = new List<Map>();
         for (var item in value)
         {
           mapList.add(item is Exportable
