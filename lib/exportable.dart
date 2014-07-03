@@ -115,6 +115,17 @@ class Exportable {
 
   static dynamic _exportSimpleValue(value) {
     if (_isJsonSupported(value)) {
+      if (value is List)
+      {
+        String list = "[";
+        for (var item in value)
+        {
+          list = list + (item is Exportable
+              ? item.toMap() : _exportSimpleValue(value)) + ",";
+        }
+        list.replaceFirst(new RegExp(",\$") ,"]");
+        return list;
+      }
       return value;
     } else if (value is DateTime) {
       return (value as DateTime).toUtc().toString();
