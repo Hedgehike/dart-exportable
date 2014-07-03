@@ -117,14 +117,13 @@ class Exportable {
     if (_isJsonSupported(value)) {
       if (value is List)
       {
-        String list = "[";
+        List mapList;
         for (var item in value)
         {
-          list = list + (item is Exportable
-              ? item.toMap() : _exportSimpleValue(value)) + ",";
+          mapList.add(item is Exportable
+              ? item.toMap() : _exportSimpleValue(item));
         }
-        list.replaceFirst(new RegExp(",\$") ,"]");
-        return list;
+        return mapList;
       }
       return value;
     } else if (value is DateTime) {
