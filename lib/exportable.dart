@@ -119,7 +119,7 @@ class Exportable {
       {
         if (value.length>0 && _isJsonSupported(value[0]))
         {
-          return value.toString();
+          return value;
         }
         else
         {
