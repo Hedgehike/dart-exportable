@@ -117,13 +117,20 @@ class Exportable {
     if (_isJsonSupported(value)) {
       if (value is List)
       {
-        List mapList = new List<Map>();
-        for (var item in value)
+        if (value.length>0 && _isJsonSupported(value[0]))
         {
-          mapList.add(item is Exportable
-              ? item.toMap() : _exportSimpleValue(item));
+          return value.toString();
         }
-        return mapList;
+        else
+        {
+          List mapList = new List<Map>();
+          for (var item in value)
+          {
+            mapList.add(item is Exportable
+                ? item.toMap() : _exportSimpleValue(item));
+          }
+          return mapList;
+        }
       }
       return value;
     } else if (value is DateTime) {
